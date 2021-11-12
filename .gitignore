@@ -102,3 +102,8 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Node Modules
+
+./server/node_modules
+./parkit/node_modules
