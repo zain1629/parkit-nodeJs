@@ -55,7 +55,9 @@ class RootApp extends React.Component {
     return (
       <>
         <NavigationContainer>
-          <SecondStack.Navigator headerMode="none" initialRouteName="Auth">
+          <SecondStack.Navigator
+            screenOptions={{headerShown: false}}
+            initialRouteName="Auth">
             <SecondStack.Screen name="Auth" component={AuthStackScreens} />
           </SecondStack.Navigator>
         </NavigationContainer>

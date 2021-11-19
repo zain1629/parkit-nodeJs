@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,60 +7,59 @@ import {
   StyleSheet,
   StatusBar,
   Alert,
-} from "react-native";
-import * as Animatable from "react-native-animatable";
-import theme from "../../constants/Theme";
-import Loading from "../../components/Loading";
-import { Block, Button, Input, Text, NavBar } from "galio-framework";
-import { Auth } from "aws-amplify";
+} from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import theme from '../../constants/Theme';
+import Loading from '../../components/Loading';
+import {Block, Button, Input, Text, NavBar} from 'galio-framework';
 
 //redux
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as actions from "../../redux/Actions";
+// import {connect} from 'react-redux';
+// import {bindActionCreators} from 'redux';
+// import * as actions from '../../redux/Actions';
 
 class ForgotPasswordSubmitScreen extends React.Component {
   state = {
-    email: "savon40@gmail.com",
-    code: "059382",
-    password: "Test1234",
-    confirmPassword: "Test1234",
+    email: 'savon40@gmail.com',
+    code: '059382',
+    password: 'Test1234',
+    confirmPassword: 'Test1234',
     isLoading: false,
-    error: "",
+    error: '',
   };
 
-  resetPassword = async () => {
-    const { code, password, confirmPassword } = this.state;
+  // resetPassword = async () => {
+  //   const {code, password, confirmPassword} = this.state;
 
-    this.setState({ isLoading: true });
-    try {
-      console.log("here i am email:: ", this.props.route.params.email);
-      if (password !== confirmPassword) {
-        this.setState({ error: "Passwords do not match!" });
-      }
+  //   this.setState({isLoading: true});
+  //   try {
+  //     console.log('here i am email:: ', this.props.route.params.email);
+  //     if (password !== confirmPassword) {
+  //       this.setState({error: 'Passwords do not match!'});
+  //     }
 
-      await Auth.forgotPasswordSubmit(
-        this.props.route.params.email,
-        code,
-        password
-      );
-      const user = await Auth.signIn(this.props.route.params.email, password);
+  //     await Auth.forgotPasswordSubmit(
+  //       this.props.route.params.email,
+  //       code,
+  //       password,
+  //     );
+  //     const user = await Auth.signIn(this.props.route.params.email, password);
 
-      this.setState({ isLoading: false });
-      this.props.loadUser(user);
-      const { navigation } = this.props;
-      navigation.popToTop();
-      navigation.navigate("Home");
-    } catch (err) {
-      console.log("error here", err);
-      this.setState({ error: err });
-      this.setState({ isLoading: false });
-    }
-  };
+  //     this.setState({isLoading: false});
+  //     this.props.loadUser(user);
+  //     const {navigation} = this.props;
+  //     navigation.popToTop();
+  //     navigation.navigate('Home');
+  //   } catch (err) {
+  //     console.log('error here', err);
+  //     this.setState({error: err});
+  //     this.setState({isLoading: false});
+  //   }
+  // };
 
   render() {
-    const { code, error, password, confirmPassword, isLoading } = this.state;
-    const { navigation } = this.props;
+    const {code, error, password, confirmPassword, isLoading} = this.state;
+    const {navigation} = this.props;
 
     return (
       <View style={styles.container}>
@@ -78,8 +77,7 @@ class ForgotPasswordSubmitScreen extends React.Component {
             {
               backgroundColor: theme.COLORS.WHITE,
             },
-          ]}
-        >
+          ]}>
           {isLoading ? (
             <Loading />
           ) : (
@@ -89,8 +87,7 @@ class ForgotPasswordSubmitScreen extends React.Component {
                   muted
                   center
                   size={theme.SIZES.FONT * 0.975}
-                  style={{ paddingHorizontal: theme.SIZES.BASE }}
-                >
+                  style={{paddingHorizontal: theme.SIZES.BASE}}>
                   You should have received a confirmation code. Please enter
                   that here, along with your new password.
                 </Text>
@@ -101,7 +98,7 @@ class ForgotPasswordSubmitScreen extends React.Component {
                   style={styles.input}
                   color={theme.COLORS.PRIMARY}
                   value={code}
-                  onChangeText={(code) => this.setState({ code })}
+                  onChangeText={code => this.setState({code})}
                 />
                 <Input
                   rounded
@@ -111,7 +108,7 @@ class ForgotPasswordSubmitScreen extends React.Component {
                   style={styles.input}
                   color={theme.COLORS.PRIMARY}
                   value={password}
-                  onChangeText={(password) => this.setState({ password })}
+                  onChangeText={password => this.setState({password})}
                 />
                 <Input
                   rounded
@@ -121,8 +118,8 @@ class ForgotPasswordSubmitScreen extends React.Component {
                   style={styles.input}
                   color={theme.COLORS.PRIMARY}
                   value={confirmPassword}
-                  onChangeText={(confirmPassword) =>
-                    this.setState({ confirmPassword })
+                  onChangeText={confirmPassword =>
+                    this.setState({confirmPassword})
                   }
                 />
                 {/* </Block>
@@ -132,20 +129,17 @@ class ForgotPasswordSubmitScreen extends React.Component {
                 <Button
                   round
                   color={theme.COLORS.PRIMARY}
-                  onPress={() => this.resetPassword()}
-                >
+                  onPress={() => this.resetPassword()}>
                   Reset Password
                 </Button>
                 <Button
                   color="transparent"
                   shadowless
-                  onPress={() => navigation.navigate("SignInScreen")}
-                >
+                  onPress={() => navigation.navigate('SignInScreen')}>
                   <Text
                     center
                     color={theme.COLORS.BLACK}
-                    size={theme.SIZES.FONT * 1.25}
-                  >
+                    size={theme.SIZES.FONT * 1.25}>
                     Back to Sign in
                   </Text>
                 </Button>
@@ -158,16 +152,19 @@ class ForgotPasswordSubmitScreen extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return state
-};
+// const mapStateToProps = state => {
+//   return state;
+// };
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch)
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators(actions, dispatch);
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ForgotPasswordSubmitScreen);
-// export default ForgotPasswordSubmitScreen;
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+// )(ForgotPasswordSubmitScreen);
+export default ForgotPasswordSubmitScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -176,64 +173,64 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
   footer: {
     flex: 3,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
   text_header: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
     fontSize: 30,
   },
   text_footer: {
-    color: "#05375a",
+    color: '#05375a',
     fontSize: 18,
   },
   action: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
+    borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
   },
   actionError: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#FF0000",
+    borderBottomColor: '#FF0000',
     paddingBottom: 5,
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === "ios" ? 0 : -12,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
     paddingLeft: 10,
-    color: "#05375a",
+    color: '#05375a',
   },
   errorMsg: {
-    color: "#FF0000",
+    color: '#FF0000',
     fontSize: 14,
   },
   button: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 50,
   },
   signIn: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
   },
   textSign: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });

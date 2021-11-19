@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,44 +7,43 @@ import {
   StyleSheet,
   StatusBar,
   Alert,
-} from "react-native";
-import * as Animatable from "react-native-animatable";
-import theme from "../../constants/Theme";
-import Loading from "../../components/Loading";
-import { Block, Button, Input, Text, NavBar } from "galio-framework";
-import { Auth } from "aws-amplify";
+} from 'react-native';
+import * as Animatable from 'react-native-animatable';
+import theme from '../../constants/Theme';
+import Loading from '../../components/Loading';
+import {Block, Button, Input, Text, NavBar} from 'galio-framework';
 
 //redux
-import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
-import * as actions from "../../redux/Actions";
+// import {connect} from 'react-redux';
+// import {bindActionCreators} from 'redux';
+// import * as actions from '../../redux/Actions';
 
 class ForgotPasswordScreen extends React.Component {
   state = {
-    email: "savon40@gmail.com",
+    email: 'savon40@gmail.com',
     isLoading: false,
-    error: "",
+    error: '',
   };
 
-  resetPassword = async () => {
-    this.setState({ isLoading: true });
-    try {
-      const { email } = this.state;
-      console.log('email here: ', email)
-      const user = await Auth.forgotPassword(email);
-      const { navigation } = this.props;
-      navigation.navigate("ForgotPasswordSubmitScreen", { email });
-      this.setState({ isLoading: false });
-    } catch (err) {
-      console.log(err);
-      Alert.alert("Something Went Wrong :(", err.code, [{ text: "Okay" }]);
-      this.setState({ error: err });
-    }
-  };
+  // resetPassword = async () => {
+  //   this.setState({isLoading: true});
+  //   try {
+  //     const {email} = this.state;
+  //     console.log('email here: ', email);
+  //     const user = await Auth.forgotPassword(email);
+  //     const {navigation} = this.props;
+  //     navigation.navigate('ForgotPasswordSubmitScreen', {email});
+  //     this.setState({isLoading: false});
+  //   } catch (err) {
+  //     console.log(err);
+  //     Alert.alert('Something Went Wrong :(', err.code, [{text: 'Okay'}]);
+  //     this.setState({error: err});
+  //   }
+  // };
 
   render() {
-    const { email, password, isLoading, error } = this.state;
-    const { navigation } = this.props;
+    const {email, password, isLoading, error} = this.state;
+    const {navigation} = this.props;
 
     return (
       <View style={styles.container}>
@@ -62,8 +61,7 @@ class ForgotPasswordScreen extends React.Component {
             {
               backgroundColor: theme.COLORS.WHITE,
             },
-          ]}
-        >
+          ]}>
           {isLoading ? (
             <Loading />
           ) : (
@@ -72,8 +70,7 @@ class ForgotPasswordScreen extends React.Component {
                 <Text
                   muted
                   size={theme.SIZES.FONT * 0.975}
-                  style={{ paddingHorizontal: theme.SIZES.BASE }}
-                >
+                  style={{paddingHorizontal: theme.SIZES.BASE}}>
                   Enter your email here. If there is an account related to this
                   email, you will receive a code to reset your password.
                 </Text>
@@ -86,7 +83,7 @@ class ForgotPasswordScreen extends React.Component {
                   style={styles.input}
                   color={theme.COLORS.PRIMARY}
                   value={email}
-                  onChangeText={(email) => this.setState({ email })}
+                  onChangeText={email => this.setState({email})}
                 />
                 {/* </Block>
               <Block flex> */}
@@ -95,20 +92,17 @@ class ForgotPasswordScreen extends React.Component {
                 <Button
                   round
                   color={theme.COLORS.PRIMARY}
-                  onPress={() => this.resetPassword()}
-                >
+                  onPress={() => this.resetPassword()}>
                   Reset Password
                 </Button>
                 <Button
                   color="transparent"
                   shadowless
-                  onPress={() => navigation.navigate("SignInScreen")}
-                >
+                  onPress={() => navigation.navigate('SignInScreen')}>
                   <Text
                     center
                     color={theme.COLORS.BLACK}
-                    size={theme.SIZES.FONT * 1.25}
-                  >
+                    size={theme.SIZES.FONT * 1.25}>
                     Back to Sign in
                   </Text>
                 </Button>
@@ -130,64 +124,64 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     paddingHorizontal: 20,
     paddingBottom: 50,
   },
   footer: {
     flex: 3,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,
     paddingVertical: 30,
   },
   text_header: {
-    color: "#fff",
-    fontWeight: "bold",
+    color: '#fff',
+    fontWeight: 'bold',
     fontSize: 30,
   },
   text_footer: {
-    color: "#05375a",
+    color: '#05375a',
     fontSize: 18,
   },
   action: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#f2f2f2",
+    borderBottomColor: '#f2f2f2',
     paddingBottom: 5,
   },
   actionError: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#FF0000",
+    borderBottomColor: '#FF0000',
     paddingBottom: 5,
   },
   textInput: {
     flex: 1,
-    marginTop: Platform.OS === "ios" ? 0 : -12,
+    marginTop: Platform.OS === 'ios' ? 0 : -12,
     paddingLeft: 10,
-    color: "#05375a",
+    color: '#05375a',
   },
   errorMsg: {
-    color: "#FF0000",
+    color: '#FF0000',
     fontSize: 14,
   },
   button: {
-    alignItems: "center",
+    alignItems: 'center',
     marginTop: 50,
   },
   signIn: {
-    width: "100%",
+    width: '100%',
     height: 50,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
   },
   textSign: {
     fontSize: 18,
-    fontWeight: "bold",
+    fontWeight: 'bold',
   },
 });
