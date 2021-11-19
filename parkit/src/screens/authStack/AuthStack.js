@@ -12,7 +12,7 @@ import SplashScreen from './SplashScreen';
 const AuthStack = createStackNavigator();
 
 const AuthStackScreens = ({navigation}) => (
-  <AuthStack.Navigator headerMode="none">
+  <AuthStack.Navigator screenOptions={{headerShown: false}}>
     <AuthStack.Screen name="SplashScreen" component={SplashScreen} />
     {/* <AuthStack.Screen name="SignInScreen" component={SignInScreen} />
     <AuthStack.Screen name="SignUpScreen" component={SignUpScreen} />
