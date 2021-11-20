@@ -7,6 +7,9 @@ import {
   StyleSheet,
   StatusBar,
   Alert,
+  ImageBackground,
+  DismissKeyboard,
+  Dimensions,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import theme from '../../constants/Theme';
@@ -17,6 +20,8 @@ import {Block, Button, Input, Text, NavBar} from 'galio-framework';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import * as actions from '../../redux/Actions';
+
+const {width, height} = Dimensions.get('screen');
 
 class SignInScreen extends React.Component {
   state = {
@@ -51,57 +56,80 @@ class SignInScreen extends React.Component {
             <Loading />
           ) : (
             <>
-              <Block flex={1}>
-                <Input
-                  rounded
-                  type="email-address"
-                  placeholder="Email"
-                  autoCapitalize="none"
-                  color={theme.COLORS.PRIMARY}
-                  value={email}
-                  onChangeText={email => this.setState({email})}
-                />
-                <Input
-                  rounded
-                  password
-                  viewPass
-                  placeholder="Password"
-                  color={theme.COLORS.PRIMARY}
-                  value={password}
-                  onChangeText={password => this.setState({password})}
-                />
-                <Button
-                  color="transparent"
-                  shadowless
-                  onPress={() => navigation.navigate('ForgotPasswordScreen')}>
-                  <Text
-                    right
-                    color={theme.COLORS.BLACK}
-                    size={theme.SIZES.FONT * 0.75}>
-                    Forgot Password?
-                  </Text>
-                </Button>
-
-                <Block flex={0.1} center space="between" />
-
-                <Button
-                  round
-                  color={theme.COLORS.PRIMARY}
-                  disabled={!email || !password || isLoading}
-                  onPress={() => this.login()}>
-                  Sign In
-                </Button>
-                <Button
-                  color="transparent"
-                  shadowless
-                  onPress={() => navigation.navigate('SignUpScreen')}>
-                  <Text
-                    center
-                    color={theme.COLORS.BLACK}
-                    size={theme.SIZES.FONT * 1.25}>
-                    Don't have an account? Sign Up
-                  </Text>
-                </Button>
+              <Block flex middle>
+                <Block flex middle>
+                  <Block>
+                    <Block flex space="between">
+                      <Block flex={0.8} middle space="between">
+                        <Block center flex={0.8}>
+                          <Block flex space="between">
+                            <Block>
+                              <Block
+                                width={width * 0.8}
+                                style={{marginBottom: 5}}>
+                                <Input
+                                  rounded
+                                  type="email-address"
+                                  placeholder="Email"
+                                  autoCapitalize="none"
+                                  color={theme.COLORS.PRIMARY}
+                                  value={email}
+                                  onChangeText={email => this.setState({email})}
+                                />
+                              </Block>
+                              <Block width={width * 0.8}>
+                                <Input
+                                  rounded
+                                  password
+                                  viewPass
+                                  placeholder="Password"
+                                  color={theme.COLORS.PRIMARY}
+                                  value={password}
+                                  onChangeText={password =>
+                                    this.setState({password})
+                                  }
+                                />
+                              </Block>
+                              <Block center>
+                                <TouchableOpacity
+                                  onPress={() =>
+                                    navigation.navigate('ForgotPasswordScreen')
+                                  }>
+                                  <Text
+                                    right
+                                    size={14}
+                                    color={theme.COLORS.PRIMARY}>
+                                    Forgot Password?
+                                  </Text>
+                                </TouchableOpacity>
+                              </Block>
+                            </Block>
+                            <Block center>
+                              <Button
+                                round
+                                color={theme.COLORS.PRIMARY}
+                                disabled={!email || !password || isLoading}
+                                onPress={() => this.login()}>
+                                Sign In
+                              </Button>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  navigation.navigate('RegisterScreen')
+                                }>
+                                <Text
+                                  right
+                                  size={14}
+                                  color={theme.COLORS.PRIMARY}>
+                                  First Time? Register Here
+                                </Text>
+                              </TouchableOpacity>
+                            </Block>
+                          </Block>
+                        </Block>
+                      </Block>
+                    </Block>
+                  </Block>
+                </Block>
               </Block>
             </>
           )}
@@ -180,14 +208,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => {
-  return {
-    userAuth: state ? state.user : null,
-  };
-};
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(SignInScreen);
+export default SignInScreen;
