@@ -72,7 +72,6 @@ const mapStateToProps = state => {
   };
 };
 
-//allows you to do this.props.removeSpace instead of this.props.dispatch.removeSpace
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(actions, dispatch);
 }

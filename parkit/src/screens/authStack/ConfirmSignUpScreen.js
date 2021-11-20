@@ -14,9 +14,9 @@ import Loading from '../../components/Loading';
 import {Block, Button, Input, Text, NavBar} from 'galio-framework';
 
 //redux
-// import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
-// import * as actions from '../../redux/Actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../redux/Actions';
 
 class ConfirmSignUpScreen extends React.Component {
   state = {
@@ -217,17 +217,16 @@ const styles = StyleSheet.create({
   },
 });
 
-// const mapStateToProps = state => {
-//   return state;
-// };
+const mapStateToProps = state => {
+  return state;
+};
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators(actions, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
 
-// export default connect(
-//   mapStateToProps,
-//   mapDispatchToProps,
-// )(ConfirmSignUpScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ConfirmSignUpScreen);
 
-export default ConfirmSignUpScreen;

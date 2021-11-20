@@ -14,9 +14,9 @@ import Loading from '../../components/Loading';
 import {Block, Button, Input, Text, NavBar} from 'galio-framework';
 
 //redux
-// import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
-// import * as actions from '../../redux/Actions';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from '../../redux/Actions';
 
 class ForgotPasswordScreen extends React.Component {
   state = {
