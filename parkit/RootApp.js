@@ -3,9 +3,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
 //redux
-// import {connect} from 'react-redux';
-// import {bindActionCreators} from 'redux';
-// import * as actions from './src/redux/Actions.js';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import * as actions from './src/redux/Actions.js';
 
 import AuthStackScreens from './src/screens/authStack/AuthStack';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -39,7 +39,7 @@ class RootApp extends React.Component {
   };
 
   render() {
-    // const {userAuth, showModal} = this.props;
+    const {userAuth, showModal} = this.props;
     // console.log('testing');
     // console.log(this.props.showModal);
     const {isLoading} = this.state;
@@ -66,16 +66,15 @@ class RootApp extends React.Component {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     userAuth: state.userData,
-//   };
-// };
+const mapStateToProps = state => {
+  return {
+    userAuth: state ? state.user : null,
+  };
+};
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators(actions, dispatch);
-// }
+//allows you to do this.props.removeSpace instead of this.props.dispatch.removeSpace
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(actions, dispatch);
+}
 
-// export default RootApp;
-
-export default RootApp;
+export default connect(mapStateToProps, mapDispatchToProps)(RootApp);

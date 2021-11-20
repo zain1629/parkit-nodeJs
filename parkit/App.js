@@ -33,10 +33,10 @@ import RootApp from './RootApp';
 import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
 import rootReducer from './src/redux/Reducer';
-// import thunk from 'redux-thunk';
+import thunk from 'redux-thunk';
 import {useState, useEffect} from 'react';
 
-// const store = createStore(rootReducer, applyMiddleware(thunk));
+const store = createStore(rootReducer, applyMiddleware(thunk));
 
 LogBox.ignoreLogs([
   'Warning: componentWillReceiveProps',
@@ -48,5 +48,9 @@ LogBox.ignoreLogs([
 ]);
 
 export default function App() {
-  return <RootApp />;
+  return (
+    <Provider store={store}>
+      <RootApp />
+    </Provider>
+  );
 }
