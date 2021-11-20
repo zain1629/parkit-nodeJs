@@ -7,6 +7,7 @@ import {
   StyleSheet,
   StatusBar,
   Alert,
+  Dimensions
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
@@ -15,6 +16,8 @@ import theme from '../../constants/Theme';
 import Loading from '../../components/Loading';
 import ZipCodes from '../../constants/ZipCodes';
 import {Block, Button, Input, Text, NavBar} from 'galio-framework';
+
+const {width, height} = Dimensions.get('screen');
 
 //redux
 import {connect} from 'react-redux';
@@ -109,69 +112,99 @@ class SignUpScreen extends React.Component {
             <Loading />
           ) : (
             <>
-              <Block flex={1}>
-                <Block flex={2}>
-                  <Input
-                    rounded
-                    type="email-address"
-                    placeholder="Email"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    color={theme.COLORS.PRIMARY}
-                    value={email}
-                    onChangeText={email => this.setState({email})}
-                  />
-                  <Input
-                    rounded
-                    password
-                    viewPass
-                    placeholder="Password"
-                    style={styles.input}
-                    color={theme.COLORS.PRIMARY}
-                    value={password}
-                    onChangeText={password => this.setState({password})}
-                  />
-                  <Input
-                    rounded
-                    password
-                    viewPass
-                    placeholder="Confirm Password"
-                    style={styles.input}
-                    color={theme.COLORS.PRIMARY}
-                    value={confirmPassword}
-                    onChangeText={confirmPassword =>
-                      this.setState({confirmPassword})
-                    }
-                  />
-                  <Input
-                    rounded
-                    type="number-pad"
-                    placeholder="Zip Code"
-                    autoCapitalize="none"
-                    style={styles.input}
-                    color={theme.COLORS.PRIMARY}
-                    value={zip_code}
-                    onChangeText={zip_code => this.setState({zip_code})}
-                  />
-                  <Block flex={0.1} center space="between"></Block>
-                  <Button
-                    round
-                    color={theme.COLORS.PRIMARY}
-                    disabled={!email || !password || isLoading}
-                    onPress={this.signUp}>
-                    Sign Up
-                  </Button>
-                  <Button
-                    color="transparent"
-                    shadowless
-                    onPress={() => navigation.navigate('SignInScreen')}>
-                    <Text
-                      center
-                      color={theme.COLORS.BLACK}
-                      size={theme.SIZES.FONT * 1.25}>
-                      Already have an Account? Sign In
-                    </Text>
-                  </Button>
+              <Block flex middle>
+                <Block flex middle>
+                  <Block>
+                    <Block flex space="between">
+                      <Block flex={0.8} middle space="between">
+                        <Block center flex={0.8}>
+                          <Block flex space="between">
+                            <Block>
+                              <Block
+                                width={width * 0.8}
+                                style={{marginBottom: 5}}>
+                                <Input
+                                  rounded
+                                  type="email-address"
+                                  placeholder="Email"
+                                  autoCapitalize="none"
+                                  color={theme.COLORS.PRIMARY}
+                                  value={email}
+                                  onChangeText={email => this.setState({email})}
+                                />
+                              </Block>
+                              <Block
+                                width={width * 0.8}
+                                style={{marginBottom: 5}}>
+                                <Input
+                                  rounded
+                                  password
+                                  viewPass
+                                  placeholder="Password"
+                                  style={styles.input}
+                                  color={theme.COLORS.PRIMARY}
+                                  value={password}
+                                  onChangeText={password =>
+                                    this.setState({password})
+                                  }
+                                />
+                              </Block>
+                              <Block
+                                width={width * 0.8}
+                                style={{marginBottom: 5}}>
+                                <Input
+                                  rounded
+                                  password
+                                  viewPass
+                                  placeholder="Confirm Password"
+                                  style={styles.input}
+                                  color={theme.COLORS.PRIMARY}
+                                  value={confirmPassword}
+                                  onChangeText={confirmPassword =>
+                                    this.setState({confirmPassword})
+                                  }
+                                />
+                              </Block>
+                              <Block width={width * 0.8}>
+                                <Input
+                                  rounded
+                                  type="number-pad"
+                                  placeholder="Zip Code"
+                                  autoCapitalize="none"
+                                  style={styles.input}
+                                  color={theme.COLORS.PRIMARY}
+                                  value={zip_code}
+                                  onChangeText={zip_code =>
+                                    this.setState({zip_code})
+                                  }
+                                />
+                              </Block>
+                            </Block>
+                            <Block center>
+                              <Button
+                                round
+                                color={theme.COLORS.PRIMARY}
+                                disabled={!email || !password || isLoading}
+                                onPress={() => this.signUp()}>
+                                Sign Up
+                              </Button>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  navigation.navigate('SignInScreen')
+                                }>
+                                <Text
+                                  right
+                                  size={14}
+                                  color={theme.COLORS.PRIMARY}>
+                                  Already have an Account? Sign In
+                                </Text>
+                              </TouchableOpacity>
+                            </Block>
+                          </Block>
+                        </Block>
+                      </Block>
+                    </Block>
+                  </Block>
                 </Block>
               </Block>
             </>

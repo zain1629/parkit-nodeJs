@@ -7,11 +7,14 @@ import {
   StyleSheet,
   StatusBar,
   Alert,
+  Dimensions,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import theme from '../../constants/Theme';
 import Loading from '../../components/Loading';
 import {Block, Button, Input, Text, NavBar} from 'galio-framework';
+
+const {width, height} = Dimensions.get('screen');
 
 //redux
 import {connect} from 'react-redux';
@@ -66,46 +69,66 @@ class ForgotPasswordScreen extends React.Component {
             <Loading />
           ) : (
             <>
-              <Block flex={1}>
-                <Text
-                  muted
-                  size={theme.SIZES.FONT * 0.975}
-                  style={{paddingHorizontal: theme.SIZES.BASE}}>
-                  Enter your email here. If there is an account related to this
-                  email, you will receive a code to reset your password.
-                </Text>
-                <Block flex={0.03} center space="between"></Block>
-                <Input
-                  rounded
-                  type="email-address"
-                  placeholder="Email"
-                  autoCapitalize="none"
-                  style={styles.input}
-                  color={theme.COLORS.PRIMARY}
-                  value={email}
-                  onChangeText={email => this.setState({email})}
-                />
-                {/* </Block>
-              <Block flex> */}
-                <Block flex={0.1} center space="between"></Block>
-
-                <Button
-                  round
-                  color={theme.COLORS.PRIMARY}
-                  onPress={() => this.resetPassword()}>
-                  Reset Password
-                </Button>
-                <Button
-                  color="transparent"
-                  shadowless
-                  onPress={() => navigation.navigate('SignInScreen')}>
-                  <Text
-                    center
-                    color={theme.COLORS.BLACK}
-                    size={theme.SIZES.FONT * 1.25}>
-                    Back to Sign in
-                  </Text>
-                </Button>
+              <Block flex middle>
+                <Block flex middle>
+                  <Block>
+                    <Block flex space="between">
+                      <Block flex={0.8} middle space="between">
+                        <Block center flex={0.8}>
+                          <Block flex space="between">
+                            <Block>
+                              <Block
+                                width={width * 0.8}
+                                style={{marginBottom: 5, marginTop: 5}}>
+                                <Text
+                                  muted
+                                  size={theme.SIZES.FONT * 0.975}
+                                  style={{paddingHorizontal: theme.SIZES.BASE}}>
+                                  Enter your email here. If there is an account
+                                  related to this email, you will receive a code
+                                  to reset your password.
+                                </Text>
+                              </Block>
+                              <Block
+                                width={width * 0.8}
+                                style={{marginBottom: 5, marginTop: 20}}>
+                                <Input
+                                  rounded
+                                  type="email-address"
+                                  placeholder="Email"
+                                  autoCapitalize="none"
+                                  color={theme.COLORS.PRIMARY}
+                                  value={email}
+                                  onChangeText={email => this.setState({email})}
+                                />
+                              </Block>
+                            </Block>
+                            <Block center>
+                              <Button
+                                round
+                                color={theme.COLORS.PRIMARY}
+                                disabled={!email || !password || isLoading}
+                                onPress={() => this.signUp()}>
+                                Reset Password
+                              </Button>
+                              <TouchableOpacity
+                                onPress={() =>
+                                  navigation.navigate('SignInScreen')
+                                }>
+                                <Text
+                                  right
+                                  size={14}
+                                  color={theme.COLORS.PRIMARY}>
+                                  Back to Sign in
+                                </Text>
+                              </TouchableOpacity>
+                            </Block>
+                          </Block>
+                        </Block>
+                      </Block>
+                    </Block>
+                  </Block>
+                </Block>
               </Block>
             </>
           )}

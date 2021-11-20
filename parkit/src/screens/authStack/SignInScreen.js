@@ -114,7 +114,7 @@ class SignInScreen extends React.Component {
                               </Button>
                               <TouchableOpacity
                                 onPress={() =>
-                                  navigation.navigate('RegisterScreen')
+                                  navigation.navigate('SignUpScreen')
                                 }>
                                 <Text
                                   right
